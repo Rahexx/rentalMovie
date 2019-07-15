@@ -35,8 +35,12 @@ head
         span.login100-form-title.p-b-59
           | Sign Up
         .wrap-input100.validate-input(data-validate='Name is required')
-          span.label-input100 Full Name
-          input.input100(type='text' name='name' placeholder='Name...')
+          span.label-input100 first Name
+          input.input100(type='text' name='firstName' placeholder='Name...')
+          span.focus-input100
+        .wrap-input100.validate-input(data-validate='Name is required')
+          span.label-input100 Last Name
+          input.input100(type='text' name='lastName' placeholder='Last name...')
           span.focus-input100
         .wrap-input100.validate-input(data-validate='Valid email is required: ex@abc.xyz')
           span.label-input100 Email
@@ -48,15 +52,15 @@ head
           span.focus-input100
         .wrap-input100.validate-input(data-validate='Password is required')
           span.label-input100 Password
-          input.input100(type='text' name='pass' placeholder='*************')
+          input.input100(type='password' name='pass' placeholder='*************')
           span.focus-input100
         .wrap-input100.validate-input(data-validate='Repeat Password is required')
           span.label-input100 Repeat Password
-          input.input100(type='text' name='repeat-pass' placeholder='*************')
+          input.input100(type='password' name='repeat-pass' placeholder='*************')
           span.focus-input100
         .flex-m.w-full.p-b-33
           .contact100-form-checkbox
-            input#ckb1.input-checkbox100(type='checkbox' name='remember-me')
+            input#ckb1.input-checkbox100(type='checkbox' name='checkbox')
             label.label-checkbox100(for='ckb1')
               span.txt1
                 | I agree to the
@@ -67,7 +71,7 @@ head
             .login100-form-bgbtn
             button.login100-form-btn
               | Sign Up
-          a.dis-block.txt3.hov1.p-r-30.p-t-10.p-b-10.p-l-30(href='/login')
+          a.dis-block.txt3.hov1.p-r-30.p-t-10.p-b-10.p-l-30(href='/sign')
             | Sign in
             i.fa.fa-long-arrow-right.m-l-5
 // ===============================================================================================

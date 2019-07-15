@@ -45,5 +45,31 @@ router.get('/sign', function (req, res, next) {
     res.render('sign');
 });
 
+router.post('/sign', function (req, res, next) {
+    console.log(req.body);
+
+    if (req.body.checkbox) {
+        const adduser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.username,
+            password: req.body.pass,
+            email: req.body.email
+        });
+
+        adduser.save((err) => {
+            if (err) {
+                res.redirect('./sign');
+                return;
+            }
+
+            res.redirect('./login');
+        });
+    }
+    else {
+        res.redirect('./sign');
+    }
+});
+
 
 module.exports = router;
