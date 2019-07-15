@@ -28,3 +28,5 @@ const movieSchema = new Schema({
         default: "The best movie ever, really you must watch this film"
     },
 });
+
+module.exports = mongoose.model('Movie', movieSchema);

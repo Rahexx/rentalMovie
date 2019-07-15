@@ -100,7 +100,10 @@ nav#colorlib-main-nav(role='navigation')
       .row.ftco-animate
         .col-md-12.text-center.button-degree.button-degree-dark-bg
           p
-            a.btn.px-5.py-4(href='/login') Zaloguj si&eogon;
+            if cookie
+                a.btn.px-5.py-4(href='/logout') Wyloguj si&eogon;
+            else
+                a.btn.px-5.py-4(href='/login') Zaloguj si&eogon;
   section.ftco-section.bg-light(style='padding-top: 45px')
     .container
       .row.justify-content-center.mb-5.pb-5

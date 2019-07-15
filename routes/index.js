@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const User = require('../models/user');
-var router = express.Router();
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -34,11 +34,16 @@ router.post('/login', function (req, res, next) {
     });
 });
 
-//Get register page
-
 router.get('/logout', function (req, res, next) {
     req.session.admin = 0;
     res.redirect('/');
 })
+
+//Get register page
+
+router.get('/sign', function (req, res, next) {
+    res.render('sign');
+});
+
 
 module.exports = router;

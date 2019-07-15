@@ -58,14 +58,21 @@ nav#colorlib-main-nav(role='navigation')
         .col-md-7.text-center.heading-section.ftco-animate
           h2 Filmy proponowane
       .row
-        .col-md-12.mb-5
+      each item, index in data
+        .col-md-12.mb-5(style='align-items: left')
           .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
             .one-half.d-md-flex
-              div
-                span.time id
+              if index==0
+                span.time=++index
+              else
+                span.time=index
               .px-md-5
-                h3 tytul
-                p Opis
+                h3=item.title
+                p=item.description
+                p='Gatunek: '
+                    span=item.category 
+                p='Rok produkcji: '
+                    span=item.year 
   footer.ftco-footer.ftco-bg-dark.ftco-section
     .container
       .row.mb-5.justify-content-center
