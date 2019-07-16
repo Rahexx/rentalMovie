@@ -33,6 +33,10 @@ nav#colorlib-main-nav(role='navigation')
             li
               a(href='/movie')
                 span Filmy
+            if sessionRole == 'admin'
+                li
+                  a(href='/admin')
+                    span Panel administracyjny
             li
               a(href='/logout')
                 span Wyloguj 

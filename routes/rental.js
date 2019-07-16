@@ -12,8 +12,9 @@ router.all('*', (req, res, next) => {
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.render('rental');
+router.get('/', function (req, res, next) {
+    const sessionRole = req.session.role;
+    res.render('rental', {sessionRole});
 });
 
 module.exports = router;

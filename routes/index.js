@@ -5,9 +5,9 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
     cookie = req.session.admin;
-    res.render('index', {cookie});
+    sessionRole = req.session.role;
+    res.render('index', { cookie, sessionRole });
 });
-
 
 //Get login page
 router.get('/login', function (req, res, next) {
@@ -26,6 +26,7 @@ router.post('/login', function (req, res, next) {
 
     finduser.exec((err, data2) => {
         if (login === data2[0].username && password === data2[0].password) {
+            req.session.role = data2[0].role;
             res.redirect('./rental');
         }
         else {

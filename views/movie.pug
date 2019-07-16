@@ -33,6 +33,10 @@ nav#colorlib-main-nav(role='navigation')
             li.active
               a(href='/movie')
                 span Filmy
+            if sessionRole == 'admin'
+                li
+                  a(href='/admin')
+                    span Panel administracyjny
             li
               a(href='/logout')
                 span Wyloguj
@@ -57,6 +61,11 @@ nav#colorlib-main-nav(role='navigation')
       .row.justify-content-center.mb-5.pb-5
         .col-md-7.text-center.heading-section.ftco-animate
           h2 Filmy proponowane
+        .row.ftco-animate
+        .col-md-12.text-center.button-degree.button-degree-dark-bg
+        if sessionRole == 'worker'
+          p
+                a.btn.px-5.py-4(href='/movie/addMovie' style='font-size: 24px')='Dodaj film'
       .row
       each item, index in data
         .col-md-12.mb-5(style='align-items: left')
