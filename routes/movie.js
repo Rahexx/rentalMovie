@@ -53,7 +53,7 @@ router.post('/addMovie', (req, res) => {
                 return;
             }
 
-            res.redirect('/movie');
+            res.redirect('/');
         });
     } else {
         res.redirect('./addMovie');

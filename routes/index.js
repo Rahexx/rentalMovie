@@ -35,6 +35,8 @@ router.post('/login', function (req, res, next) {
     });
 });
 
+//logout user
+
 router.get('/logout', function (req, res, next) {
     req.session.admin = 0;
     res.redirect('/');
