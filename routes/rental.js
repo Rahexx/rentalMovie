@@ -46,53 +46,59 @@ router.get('/', function (req, res, next) {
     });
 });
 
-//let date = Date.now();
-//let thirstyDays = 30 * 24 * 60 * 60 * 1000;
+router.get('/add/:id', (req, res) => {
+    const sessionId = req.session.id;
 
-//let dateTirstyDaysEarly = date - (42 * 24 * 60 * 60 * 1000);
-//let dateTirstyDaysLate = dateTirstyDaysEarly + thirstyDays;
+    let date = Date.now();
+    let thirstyDays = 30 * 24 * 60 * 60 * 1000;
 
-//let dateReturne = new Date(dateTirstyDaysLate);
-//let dateOutd = new Date(dateTirstyDaysEarly);
+    let dateTirstyDaysLate = date + thirstyDays;
 
-//const user = User.findById(sessionId);
-//const movie = Movie.findById("5d2c35761c9d44000009235c");
+    let dateReturne = new Date(dateTirstyDaysLate);
+    let dateOutd = new Date(date);
 
-//user.exec((errUser, dateUser) => {
-//    if (errUser) {
-//        console.log("User nie przeszedl");
-//    }
-//    else {
-//        movie.exec((errMovie, dateMovie) => {
-//            if (errMovie) {
-//                console.log("Film nie przeszedl");
-//            }
-//            else {
-//                const addRental = new Rental({
-//                    user: {
-//                        _id: dateUser._id,
-//                        firstName: dateUser.firstName,
-//                        lastName: dateUser.lastName,
-//                        username: dateUser.username,
-//                    },
-//                    movie: {
-//                        _id: dateMovie._id,
-//                        title: dateMovie.title
-//                        description: dateMovie.description,
-//                        cost: dateMovie.cost,
-//                    },
-//                    dateReturned: dateReturne,
-//                    dateOut: dateOutd,
-//                });
+    const user = User.findById(sessionId);
+    const movie = Movie.findById(req.params.id);
 
-//                addRental.save((err) => {
-//                    if (err) {
-//                        console.log("Nie zapisalo sie");
-//                    }
-//                });
-//            }
-//        });
-//    }
-//});
+    user.exec((errUser, dateUser) => {
+        if (errUser) {
+            console.log("User nie przeszedl");
+        }
+        else {
+            movie.exec((errMovie, dateMovie) => {
+                if (errMovie) {
+                    console.log("Film nie przeszedl");
+                }
+                else {
+                    const addRental = new Rental({
+                        user: {
+                            _id: dateUser._id,
+                            firstName: dateUser.firstName,
+                            lastName: dateUser.lastName,
+                            username: dateUser.username,
+                        },
+                        movie: {
+                            _id: dateMovie._id,
+                            title: dateMovie.title,
+                            description: dateMovie.description,
+                            cost: dateMovie.cost,
+                        },
+                        dateReturned: dateReturne,
+                        dateOut: dateOutd,
+                    });
+
+                    addRental.save((err) => {
+                        if (err) {
+                            console.log("Nie zapisalo sie");
+                        }
+                        res.redirect('/rental');
+                    });
+                }
+            });
+        }
+    });
+
+
+});
 
 module.exports = router;
