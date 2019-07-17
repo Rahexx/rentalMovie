@@ -25,21 +25,35 @@ router.post('/login', function (req, res, next) {
         .find({username: login});
 
     finduser.exec((err, data2) => {
-        if (login === data2[0].username && password === data2[0].password) {
-            req.session.role = data2[0].role;
-            req.session.id = data2[0]._id;
-            res.redirect('./rental');
+        if (err) {
+            console.log(err);
+            res.redirect('./login');
         }
         else {
-            res.redirect('./login');
+            if (data2.length > 0) {
+                if ((login === data2[0].username) && (password === data2[0].password)) {
+                    req.session.role = data2[0].role;
+                    req.session.id = data2[0]._id;
+                    res.redirect('./rental');
+                }
+                else {
+                    res.redirect('./login');
+                }
+            }
+            else {
+                res.redirect('./login');
+            }
+            
         }
     });
 });
+
 
 //logout user
 
 router.get('/logout', function (req, res, next) {
     req.session.admin = 0;
+    req.session.role = 'normal';
     res.redirect('/');
 })
 
