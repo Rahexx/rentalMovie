@@ -60,28 +60,46 @@ nav#colorlib-main-nav(role='navigation')
         .col-md-7.text-center.heading-section.ftco-animate
           h2 Aktualne wypozyczenia
       .row
-        .col-md-12.mb-5
-          .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
-            .one-half.d-md-flex
-              div
-                span.time Data
-              .px-md-5
-                h3 Tytu&lstrok;
-                p Opis filmu
+        if data.length>=1
+            each item in data
+                .col-md-12.mb-5
+                  .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
+                    .one-half.d-md-flex
+                      div
+                        p.time(style='font-size: 18px')="Data wypozyczenia: " + item.dateOut
+                        p.time(style='font-size: 18px')="Data konca wypozyczenia: " + item.dateReturned
+                      .px-md-5
+                        h3=item.movie.title
+                        p=item.movie.description
+                        p="Cena: " + item.movie.cost + "zl"
+        else
+            .container
+              .row.justify-content-center.mb-5.pb-5
+                .col-md-7.text-center.heading-section.ftco-animate
+                  h2 Brak aktualych wypozyczen
   section.ftco-section
     .container
       .row.justify-content-center.mb-5.pb-5
         .col-md-7.text-center.heading-section.ftco-animate
           h2 Historia wypozycze&nacute;
       .row
-        .col-md-12.mb-5
-          .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
-            .one-half.d-md-flex
-              div
-                span.time Data
-              .px-md-5
-                h3 Tytu&lstrok;
-                p Opis filmu
+        if data2.length >= 1
+            each item in data2
+                .col-md-12.mb-5
+                  .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
+                    .one-half.d-md-flex
+                      div
+                        p.time(style='font-size: 18px')="Data wypozyczenia: " + item.dateOut
+                        p.time(style='font-size: 18px')="Data konca wypozyczenia: " + item.dateReturned
+                      .px-md-5
+                        h3=item.movie.title
+                        p=item.movie.description
+                        p="Cena: " + item.movie.cost + "zl"
+        else
+            .container
+              .row.justify-content-center.mb-5.pb-5
+                .col-md-7.text-center.heading-section.ftco-animate
+                  h2 Brak starych wypozyczen
   footer.ftco-footer.ftco-bg-dark.ftco-section
     .container
       .row.mb-5.justify-content-center

@@ -27,6 +27,7 @@ router.post('/login', function (req, res, next) {
     finduser.exec((err, data2) => {
         if (login === data2[0].username && password === data2[0].password) {
             req.session.role = data2[0].role;
+            req.session.id = data2[0]._id;
             res.redirect('./rental');
         }
         else {

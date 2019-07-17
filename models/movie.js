@@ -27,6 +27,11 @@ const movieSchema = new Schema({
         required: true,
         default: "The best movie ever, really you must watch this film"
     },
+    cost: {
+        type: String,
+        required: true,
+        default: "2"
+    }
 });
 
 module.exports = mongoose.model('Movie', movieSchema);
