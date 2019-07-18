@@ -61,7 +61,7 @@ nav#colorlib-main-nav(role='navigation')
           .col-md-7.col-sm-12.ftco-animate.mb-5
             p.breadcrumbs(data-scrollax=" properties: { translateY: '70%', opacity: 1.6}")
               span.mr-2
-            h1.mb-3(data-scrollax=" properties: { translateY: '70%', opacity: .9}") Lista film&oacute;w
+            h1.mb-3(data-scrollax=" properties: { translateY: '70%', opacity: .9}") Lista zgloszen
   section.ftco-section
    .container
       .row.justify-content-center.mb-5.pb-5
@@ -74,17 +74,26 @@ nav#colorlib-main-nav(role='navigation')
         .col-md-7.text-center.heading-section.ftco-animate
           h2 oczekujace problemy
       .row
-      .col-md-12.mb-5(style='align-items: left')
-          .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
-            .one-half.d-md-flex
-              span.time='Status: '
-              .px-md-5
-                h3='Tytul zgloszenia'
-                p='Opis zgloszenia'
-                p='Czas zgloszenia : '
-                    span='data' 
-                p='czas rozwiazania problemu: '
-                    span='data'
+          each item in data
+              .col-md-12.mb-5(style='align-items: left')
+                  .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
+                    .one-half.d-md-flex
+                      span.time='Uzytkownik: ' + item.user.username
+                      .px-md-5
+                        h3='Tytul zgloszenia: '
+                            span=item.title
+                        p=' Status: '
+                            span=item.status
+                        p='Opis zgloszenia: '
+                            span=item.description
+                        p='Czas zgloszenia: '
+                            span=item.notificationTime
+                        if item.timeSolveProblem
+                            p='data rozwiazania problemu: '
+                                span=item.timeSolveProblem
+                        else
+                            p='data rozwiazania problemu: '
+                                span='w toku'
   footer.ftco-footer.ftco-bg-dark.ftco-section
     .container
       .row.mb-5.justify-content-center

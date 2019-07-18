@@ -17,11 +17,26 @@ const helpSchema = new Schema({
     },
     notificationTime: {
         type: Date,
-        default: "Date.now"
+        required: true,
+        default: Date.now
     },
     timeSolveProblem: {
         type: Date,
-    }
+    },
+    status: {
+        type: String,
+        required: true,
+        default: 'Oczekujacy'
+    },
+    user: {
+        type: new mongoose.Schema({
+            username: {
+                type: String,
+                required: true,
+            },
+        }),
+        required: true,
+    },
 });
 
 module.exports = mongoose.model('Help', helpSchema);
