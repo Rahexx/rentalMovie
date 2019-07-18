@@ -34,10 +34,17 @@ nav#colorlib-main-nav(role='navigation')
             li
               a(href='/movie')
                 span Filmy
+            if sessionRole == 'normal' || sessionRole == 'worker'
+                li
+                  a(href='/help')
+                    span Zglaszanie pomocy
             if sessionRole == 'admin'
                 li
                   a(href='/admin')
                     span Panel administracyjny
+                li
+                  a(href='/helpdesk')
+                    span Zgloszenia problemow uzytkownikow
             if cookie
                 li
                   a(href='/logout')

@@ -27,16 +27,15 @@ nav#colorlib-main-nav(role='navigation')
             li
               a(href='/')
                 span Strona glowna
-            li.active
+            li
               a(href='/rental')
                 span Wypozyczenia
             li
               a(href='/movie')
                 span Filmy
-            if sessionRole == 'normal' || sessionRole == 'worker'
-                li
-                  a(href='/help')
-                    span Zglaszanie pomocy
+            li.active
+              a(href='/help')
+                span Zglaszanie pomocy
             if sessionRole == 'admin'
                 li
                   a(href='/admin')
@@ -46,7 +45,7 @@ nav#colorlib-main-nav(role='navigation')
                     span Zgloszenia problemow uzytkownikow
             li
               a(href='/logout')
-                span Wyloguj 
+                span Wyloguj
 #colorlib-page
   header
     .container
@@ -60,53 +59,32 @@ nav#colorlib-main-nav(role='navigation')
       .container(data-scrollax-parent='true')
         .row.slider-text.align-items-end
           .col-md-7.col-sm-12.ftco-animate.mb-5
-            h1.mb-3(data-scrollax=" properties: { translateY: '70%', opacity: .9}") Wypo&zdot;yczenia
-  section.ftco-section.bg-light
-    .container
-      .row.justify-content-center.mb-5.pb-5
-        .col-md-7.text-center.heading-section.ftco-animate
-          h2 Aktualne wypozyczenia
-      .row
-        if data.length>=1
-            each item in data
-                .col-md-12.mb-5
-                  .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
-                    .one-half.d-md-flex
-                      div
-                        p.time(style='font-size: 18px')="Data wypozyczenia: " + item.dateOut
-                        p.time(style='font-size: 18px')="Data konca wypozyczenia: " + item.dateReturned
-                      .px-md-5
-                        h3=item.movie.title
-                        p=item.movie.description
-                        p="Cena: " + item.movie.cost + "zl"
-        else
-            .container
-              .row.justify-content-center.mb-5.pb-5
-                .col-md-7.text-center.heading-section.ftco-animate
-                  h2 Brak aktualych wypozyczen
+            p.breadcrumbs(data-scrollax=" properties: { translateY: '70%', opacity: 1.6}")
+              span.mr-2
+            h1.mb-3(data-scrollax=" properties: { translateY: '70%', opacity: .9}") Lista film&oacute;w
   section.ftco-section
-    .container
+   .container
       .row.justify-content-center.mb-5.pb-5
+        .row.ftco-animate
+        .col-md-12.text-center.button-degree.button-degree-dark-bg
+          span
+                a.btn.px-5.py-4(href='/help/addHelp' style='margin-right: 50px; margin-bottom: 50px;')='Dodaj zgloszenie'
+          span
+                a.btn.px-5.py-4(href='/help/historyHelp' style='margin-bottom: 50px;')='Historia zgloszen'
         .col-md-7.text-center.heading-section.ftco-animate
-          h2 Historia wypozycze&nacute;
+          h2 oczekujace problemy
       .row
-        if data2.length >= 1
-            each item in data2
-                .col-md-12.mb-5
-                  .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
-                    .one-half.d-md-flex
-                      div
-                        p.time(style='font-size: 18px')="Data wypozyczenia: " + item.dateOut
-                        p.time(style='font-size: 18px')="Data konca wypozyczenia: " + item.dateReturned
-                      .px-md-5
-                        h3=item.movie.title
-                        p=item.movie.description
-                        p="Cena: " + item.movie.cost + "zl"
-        else
-            .container
-              .row.justify-content-center.mb-5.pb-5
-                .col-md-7.text-center.heading-section.ftco-animate
-                  h2 Brak starych wypozyczen
+      .col-md-12.mb-5(style='align-items: left')
+          .classes-wrap.d-flex.pb-4.mb-4.ftco-animate
+            .one-half.d-md-flex
+              span.time='Status: '
+              .px-md-5
+                h3='Tytul zgloszenia'
+                p='Opis zgloszenia'
+                p='Czas zgloszenia : '
+                    span='data' 
+                p='czas rozwiazania problemu: '
+                    span='data'
   footer.ftco-footer.ftco-bg-dark.ftco-section
     .container
       .row.mb-5.justify-content-center
@@ -126,7 +104,7 @@ nav#colorlib-main-nav(role='navigation')
           .ftco-footer-widget
             h2.mb-3 Contact Us
             p.h3.email
-              a(href='#') Madev@info.com
+              a(href='#') madev@info.com
       .row
         .col-md-12.text-center
           p

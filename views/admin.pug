@@ -38,9 +38,17 @@ nav#colorlib-main-nav(role='navigation')
             li
               a(href='/movie')
                 span Filmy
-            li.active
-              a(href='/admin')
-                span Panel administracyjny
+            if sessionRole == 'normal' || sessionRole == 'worker'
+                li
+                  a(href='/help')
+                    span Zglaszanie pomocy
+            if sessionRole == 'admin'
+                li.active
+                  a(href='/admin')
+                    span Panel administracyjny
+                li
+                  a(href='/helpdesk')
+                    span Zgloszenia problemow uzytkownikow
             li
               a(href='/logout')
                 span Wyloguj

@@ -16,6 +16,7 @@ const indexRouter = require('./routes/index');
 const rentalRouter = require('./routes/rental');
 const movieRouter = require('./routes/movie');
 const adminRouter = require('./routes/admin');
+const helpRouter = require('./routes/help');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/rental', rentalRouter);
 app.use('/movie', movieRouter);
 app.use('/admin', adminRouter);
+app.use('/help', helpRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
