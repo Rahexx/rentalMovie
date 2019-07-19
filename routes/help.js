@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     const sessionId = req.session.id; 
 
     const findHelp = Help
-        .find({ $and: [{ 'user._id': sessionId }, { $or: [{ status: 'Oczekujacy' }, { status: 'W trakcie' }] }] })
+        .find({ $and: [{ 'user._id': sessionId }, { $or: [{ status: 'Oczekujacy' }, { status: 'W toku' }] }] })
         .sort({ notificationTime: 1 });;
 
     findHelp.exec((err, data) => {
