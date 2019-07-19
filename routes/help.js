@@ -15,8 +15,11 @@ router.all('*', (req, res, next) => {
 
 router.get('/', (req, res) => {
     const sessionRole = req.session.role;
+    const sessionId = req.session.id; 
 
-    const findHelp = Help.find();
+    const findHelp = Help
+        .find({ $and: [{ 'user._id': sessionId }, { $or: [{ status: 'Oczekujacy' }, { status: 'W trakcie' }] }] })
+        .sort({ notificationTime: 1 });;
 
     findHelp.exec((err, data) => {
         console.log(data);
@@ -26,6 +29,24 @@ router.get('/', (req, res) => {
         }
         else {
             res.render('help', {data, sessionRole});
+        }
+    });
+});
+
+router.get('/historyHelp', (req, res) => {
+    const sessionRole = req.session.role;
+    const sessionId = req.session.id; 
+
+
+    const findOldHelp = Help
+        .find({ $and: [{ 'user._id': sessionId }, { status: 'Zakonczony' }] })
+        .sort({ timeSolveProblem: 1});
+
+    findOldHelp.exec((err, data) => {
+        if (err) console.log(`Twoj blad to: ${err}`);
+        else {
+            console.log(data);
+            res.render('historyHelp', { data, sessionRole });
         }
     });
 });
