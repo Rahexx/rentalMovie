@@ -34,9 +34,6 @@ nav#colorlib-main-nav(role='navigation')
               a(href='/movie')
                 span Filmy
             li
-              a(href='/help')
-                span Zglaszanie pomocy
-            li
               a(href='/admin')
                 span Panel administracyjny
             li.active
@@ -83,6 +80,9 @@ nav#colorlib-main-nav(role='navigation')
                             span=item.description
                         p='Czas zgloszenia: '
                             span=item.notificationTime
+                        p='Konwersacja: '
+                        each messag in item.message
+                            p=messag
                     .one-forth
                       .button-degree.button-degree-light-2.text-right
                         span

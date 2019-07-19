@@ -49,15 +49,24 @@ router.get('/update/:id', (req, res) => {
 router.post('/update/:id', (req, res) => {
     const sessionUpdateID = req.session.updateID;
     const statusHelp = req.body.status;
+    const messageAdmin = req.body.message;
+    const sessionRole = req.session.role;
+    const messages = `${sessionRole}: ${messageAdmin}`;
+
+    //message: [messages]
 
     if (statusHelp === "Zakonczony") {
-        Help.findByIdAndUpdate(sessionUpdateID, { $set: { status: statusHelp, timeSolveProblem: Date.now() } }, (err) => {
+        Help.findByIdAndUpdate(sessionUpdateID, { $set: { status: statusHelp, timeSolveProblem: Date.now() } },(err) => {
+            Help.update({ _id: sessionUpdateID }, { $push: { message: messages } }, (err2) => {
                 res.redirect('../helpdesk');
+            });
         });
     }
     else {
         Help.findByIdAndUpdate(sessionUpdateID, { $set: { status: statusHelp } }, (err) => {
+            Help.update({ _id: sessionUpdateID }, { $push: { message: messages } }, (err2) => {
                 res.redirect('../helpdesk');
+            });
         });
     }
 });

@@ -88,6 +88,8 @@ nav#colorlib-main-nav(role='navigation')
                             span=item.description
                         p='Czas zgloszenia: '
                             span=item.notificationTime
+                        each messag in item.message
+                            p=messag
   footer.ftco-footer.ftco-bg-dark.ftco-section
     .container
       .row.mb-5.justify-content-center
