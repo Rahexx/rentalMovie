@@ -11,6 +11,7 @@ router.get('/', function (req, res, next) {
 
 //Get login page
 router.get('/login', function (req, res, next) {
+    req.session.userDB = 0;
     res.render('log');
 });
 
@@ -60,28 +61,47 @@ router.get('/logout', function (req, res, next) {
 //Get register page
 
 router.get('/sign', function (req, res, next) {
-    res.render('sign');
+    const userDB = req.session.userDB;
+    console.log('laduje userDB: ' + userDB);
+
+    res.render('sign', { userDB });
+  
 });
 
 router.post('/sign', function (req, res, next) {
     console.log(req.body);
 
     if (req.body.checkbox) {
-        const adduser = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            username: req.body.username,
-            password: req.body.pass,
-            email: req.body.email
-        });
 
-        adduser.save((err) => {
-            if (err) {
-                res.redirect('./sign');
-                return;
+        const findUser = User
+            .find({ username: req.body.username });
+        findUser.exec((err, data) => {
+            if (data.username == req.body.username) {
+                req.session.userDB = 0;
+
+                const adduser = new User({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    username: req.body.username,
+                    password: req.body.pass,
+                    email: req.body.email
+                });
+
+                adduser.save((err) => {
+                    if (err) {
+                        res.redirect('./sign');
+                        return;
+                    }
+
+                    res.redirect('./login');
+                });
+
             }
-
-            res.redirect('./login');
+            else {
+                req.session.userDB = 1;
+                console.log('Jest juz taki uzytkownik');
+                res.redirect('./sign');
+            }
         });
     }
     else {

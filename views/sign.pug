@@ -49,6 +49,8 @@ head
         .wrap-input100.validate-input(data-validate='Username is required')
           span.label-input100 Username
           input.input100(type='text' name='username' placeholder='Username...')
+          if userDB
+            p(style='color: red')='Jest juz taki uzytkownik'
           span.focus-input100
         .wrap-input100.validate-input(data-validate='Password is required')
           span.label-input100 Password

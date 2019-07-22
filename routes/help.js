@@ -89,4 +89,8 @@ router.post('/addHelp', (req, res) => {
     });
 });
 
+router.get('/sendMessage', (req, res) => {
+    res.render('sendMessage');
+});
+
 module.exports = router;
