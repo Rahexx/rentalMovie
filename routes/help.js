@@ -89,8 +89,27 @@ router.post('/addHelp', (req, res) => {
     });
 });
 
-router.get('/sendMessage', (req, res) => {
+router.get('/sendMessage/:id', (req, res) => {
+    req.session.sendID = req.params.id;
+
     res.render('sendMessage');
+});
+
+router.post('/sendMessage/:id', (req, res) => {
+    const sendMessageID = req.session.sendID;
+    const messageUser = req.body.messageUser;
+    const sessionRole = req.session.role;
+    const messages = `${sessionRole}: ${messageUser}`;
+
+    console.log(messages);
+
+    Help.findByIdAndUpdate(sendMessageID, { $push: { message: messages } }, (err) => {
+            res.redirect('../../help');
+    });
+
+    //Help.update({ _id: sendMessageID }, { $push: { message: messages } }, (err2) => {
+    //    res.redirect('/help');
+    //});
 });
 
 module.exports = router;
